@@ -1,10 +1,10 @@
-def select_best(population_results):
+def select_best(population):
 
     sorted_population = sorted(
 
-        population_results,
+        population,
 
-        key=lambda x: x["fitness_score"],
+        key=lambda x: x["fitness"],
 
         reverse=True
     )

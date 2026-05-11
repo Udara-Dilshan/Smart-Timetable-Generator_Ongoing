@@ -1,0 +1,389 @@
+* {
+  margin: 0;
+
+  padding: 0;
+
+  box-sizing: border-box;
+
+  font-family: Arial, sans-serif;
+}
+
+body {
+  background: #f1f5f9;
+}
+
+.app-layout {
+  display: flex;
+
+  min-height: 100vh;
+}
+
+/* SIDEBAR */
+
+.sidebar {
+  width: 240px;
+
+  background: #1e293b;
+
+  color: white;
+
+  padding: 30px 20px;
+}
+
+.sidebar h2 {
+  margin-bottom: 40px;
+
+  text-align: center;
+}
+
+.sidebar ul {
+  list-style: none;
+}
+
+.sidebar li {
+  padding: 14px;
+
+  margin-bottom: 10px;
+
+  border-radius: 8px;
+
+  cursor: pointer;
+}
+
+.sidebar li:hover {
+  background: #334155;
+}
+
+/* MAIN CONTENT */
+
+.main-content {
+  flex: 1;
+
+  padding: 20px;
+}
+
+/* NAVBAR */
+
+.navbar {
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+
+  margin-bottom: 30px;
+}
+
+.navbar h1 {
+  color: #1e293b;
+}
+
+.navbar button {
+  padding: 12px 22px;
+
+  border: none;
+
+  background: #2563eb;
+
+  color: white;
+
+  border-radius: 10px;
+
+  cursor: pointer;
+}
+
+.navbar button:hover {
+  background: #1d4ed8;
+}
+
+/* CARDS */
+
+.cards {
+  display: grid;
+
+  grid-template-columns: repeat(4, 1fr);
+
+  gap: 20px;
+
+  margin-bottom: 30px;
+}
+
+.card {
+  background: white;
+
+  padding: 25px;
+
+  border-radius: 14px;
+
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.08);
+}
+
+.card h3 {
+  color: #64748b;
+
+  margin-bottom: 10px;
+}
+
+.card p {
+  font-size: 28px;
+
+  font-weight: bold;
+
+  color: #1e293b;
+}
+
+/* TIMETABLE */
+
+.timetable-section {
+  background: white;
+
+  padding: 20px;
+
+  border-radius: 14px;
+
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.08);
+
+  overflow-x: auto;
+}
+
+.timetable {
+  width: 100%;
+
+  border-collapse: collapse;
+}
+
+.timetable th {
+  background: #2563eb;
+
+  color: white;
+
+  padding: 16px;
+
+  border: 1px solid #ddd;
+}
+
+.timetable td {
+  width: 180px;
+
+  height: 120px;
+
+  border: 1px solid #ddd;
+
+  vertical-align: top;
+
+  padding: 8px;
+}
+
+.time-cell {
+  background: #f8fafc;
+
+  font-weight: bold;
+
+  text-align: center;
+}
+
+.subject-card {
+  background: #dbeafe;
+
+  border-left: 6px solid #2563eb;
+
+  border-radius: 10px;
+
+  padding: 10px;
+
+  height: 100%;
+}
+
+.subject-card strong {
+  color: #1e3a8a;
+
+  display: block;
+
+  margin-bottom: 8px;
+}
+
+.subject-card p {
+  margin: 4px 0;
+
+  font-size: 14px;
+
+  color: #334155;
+}
+
+.subject-card small {
+  color: #475569;
+}
+
+.lunch-break {
+  background: #fde68a;
+
+  text-align: center;
+
+  font-weight: bold;
+
+  color: #92400e;
+}
+
+.lunch-cell {
+  background: #fbbf24;
+
+  text-align: center;
+
+  font-weight: bold;
+}
+
+.subject-card {
+  border-radius: 12px;
+
+  padding: 10px;
+
+  height: 100%;
+
+  transition: 0.3s ease;
+
+  cursor: pointer;
+}
+
+.subject-card:hover {
+  transform: scale(1.03);
+
+  box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* BLUE */
+
+.blue-card {
+  background: #dbeafe;
+
+  border-left: 6px solid #2563eb;
+}
+
+/* GREEN */
+
+.green-card {
+  background: #dcfce7;
+
+  border-left: 6px solid #16a34a;
+}
+
+/* PURPLE */
+
+.purple-card {
+  background: #ede9fe;
+
+  border-left: 6px solid #7c3aed;
+}
+
+/* ORANGE */
+
+.orange-card {
+  background: #ffedd5;
+
+  border-left: 6px solid #ea580c;
+}
+
+/* DEFAULT */
+
+.default-card {
+  background: #f1f5f9;
+
+  border-left: 6px solid #64748b;
+}
+.subject-form {
+  background: white;
+
+  padding: 20px;
+
+  border-radius: 14px;
+
+  margin-bottom: 30px;
+
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.08);
+}
+
+.form-grid {
+  display: grid;
+
+  grid-template-columns: repeat(3, 1fr);
+
+  gap: 15px;
+
+  margin-top: 20px;
+}
+
+.form-grid input,
+.form-grid select {
+  padding: 12px;
+
+  border: 1px solid #cbd5e1;
+
+  border-radius: 8px;
+}
+
+.add-btn {
+  margin-top: 20px;
+
+  padding: 12px 20px;
+
+  border: none;
+
+  background: #16a34a;
+
+  color: white;
+
+  border-radius: 10px;
+
+  cursor: pointer;
+}
+
+.add-btn:hover {
+  background: #15803d;
+}
+
+.subject-table-container {
+  background: white;
+
+  padding: 20px;
+
+  border-radius: 14px;
+
+  margin-bottom: 30px;
+
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.08);
+}
+
+.subject-table {
+  width: 100%;
+
+  border-collapse: collapse;
+
+  margin-top: 20px;
+}
+
+.subject-table th {
+  background: #2563eb;
+
+  color: white;
+
+  padding: 12px;
+}
+
+.subject-table td {
+  border: 1px solid #ddd;
+
+  padding: 12px;
+}
+
+.delete-btn {
+  padding: 8px 14px;
+
+  border: none;
+
+  background: #dc2626;
+
+  color: white;
+
+  border-radius: 8px;
+
+  cursor: pointer;
+}

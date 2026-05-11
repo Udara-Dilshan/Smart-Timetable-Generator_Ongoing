@@ -1,15 +1,52 @@
 import random
 
-from app.services.conflict_checker import has_conflict
-
 
 DAYS = [
+
     "Monday",
+
     "Tuesday",
+
     "Wednesday",
+
     "Thursday",
+
     "Friday"
 ]
+
+
+def overlaps(a, b):
+
+    if a["day"] != b["day"]:
+
+        return False
+
+    a_start = a["start_slot"]
+
+    a_end = (
+
+        a_start +
+
+        a["duration"] - 1
+    )
+
+    b_start = b["start_slot"]
+
+    b_end = (
+
+        b_start +
+
+        b["duration"] - 1
+    )
+
+    return not (
+
+        a_end < b_start
+
+        or
+
+        a_start > b_end
+    )
 
 
 def repair_timetable(timetable):
@@ -18,84 +55,134 @@ def repair_timetable(timetable):
 
     for entry in timetable:
 
-        valid = False
+        fixed = False
 
-        while not valid:
+        attempts = 0
 
-            overlap = has_conflict(
+        while not fixed and attempts < 100:
 
-                repaired,
+            attempts += 1
 
-                entry
-            )
+            start = entry["start_slot"]
+
+            duration = entry["duration"]
+
+            end = start + duration - 1
+
+            # -------------------------
+            # LUNCH CHECK
+            # -------------------------
+
+            lunch_conflict = False
+
+            for slot in range(start, end + 1):
+
+                if slot == 5:
+
+                    lunch_conflict = True
+
+            # -------------------------
+            # LATE CLASS CHECK
+            # -------------------------
+
+            late_conflict = False
+
+            if end >= 8:
+
+                late_conflict = True
 
             lecturer_conflict = False
 
             hall_conflict = False
 
+            student_conflict = False
+
+            # -------------------------
+            # CHECK EXISTING
+            # -------------------------
+
             for existing in repaired:
 
-                existing_start = existing["start_slot"]
+                if overlaps(existing, entry):
 
-                existing_end = (
-                    existing_start +
-                    existing["duration"] - 1
-                )
-
-                new_start = entry["start_slot"]
-
-                new_end = (
-                    new_start +
-                    entry["duration"] - 1
-                )
-
-                same_day = (
-                    existing["day"] ==
-                    entry["day"]
-                )
-
-                overlap_slots = not (
-
-                    new_end < existing_start
-                    or
-                    new_start > existing_end
-                )
-
-                if same_day and overlap_slots:
-
-                    # lecturer clash
+                    # Lecturer clash
                     if (
-                        existing["lecturer_id"] ==
+
+                        existing["lecturer_id"]
+
+                        ==
+
                         entry["lecturer_id"]
                     ):
 
                         lecturer_conflict = True
 
-                    # hall clash
+                    # Hall clash
                     if (
-                        existing["hall_id"] ==
+
+                        existing["hall_id"]
+
+                        ==
+
                         entry["hall_id"]
                     ):
 
                         hall_conflict = True
 
+                    # Student clash
+                    if (
+
+                        existing["student_group"]
+
+                        ==
+
+                        entry["student_group"]
+                    ):
+
+                        student_conflict = True
+
+            # -------------------------
+            # VALID ENTRY
+            # -------------------------
+
             if (
-                not overlap
-                and
+
                 not lecturer_conflict
+
                 and
+
                 not hall_conflict
+
+                and
+
+                not student_conflict
+
+                and
+
+                not lunch_conflict
+
+                and
+
+                not late_conflict
             ):
 
                 repaired.append(entry)
 
-                valid = True
+                fixed = True
 
             else:
 
-                # repair by random reassignment
+                # -------------------------
+                # REPAIR
+                # -------------------------
+
                 entry["day"] = random.choice(DAYS)
 
-                entry["start_slot"] = random.randint(1, 7)
+                entry["start_slot"] = random.randint(1, 6)
+
+        # FAILSAFE
+        if not fixed:
+
+            repaired.append(entry)
 
     return repaired
